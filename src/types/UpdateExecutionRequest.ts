@@ -1,5 +1,5 @@
 export interface UpdateExecutionRequest {
   name: string;
-  dueDate: string;
+  executionDate: string;
   done: boolean;
 }

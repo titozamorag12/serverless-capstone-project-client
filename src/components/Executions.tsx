@@ -46,10 +46,10 @@ export class Executions extends React.PureComponent<ExecutionsProps, ExecutionsS
 
   onExecutionCreate = async (event: React.ChangeEvent<HTMLButtonElement>) => {
     try {
-      const dueDate = this.calculateDueDate()
+      const executionDate = this.calculateexecutionDate()
       const newExecution = await createExecution(this.props.auth.getIdToken(), {
         name: this.state.newExecutionName,
-        dueDate
+        executionDate
       })
       this.setState({
         executions: [...this.state.executions, newExecution],
@@ -76,7 +76,7 @@ export class Executions extends React.PureComponent<ExecutionsProps, ExecutionsS
       const Execution = this.state.executions[pos]
       await patchExecution(this.props.auth.getIdToken(), Execution.executionId, {
         name: Execution.name,
-        dueDate: Execution.dueDate,
+        executionDate: Execution.executionDate,
         done: !Execution.done
       })
       this.setState({
@@ -172,7 +172,7 @@ export class Executions extends React.PureComponent<ExecutionsProps, ExecutionsS
                 {executions.name}
               </Grid.Column>
               <Grid.Column width={3} floated="right">
-                {executions.dueDate}
+                {executions.executionDate}
               </Grid.Column>
               <Grid.Column width={1} floated="right">
                 <Button
@@ -205,10 +205,8 @@ export class Executions extends React.PureComponent<ExecutionsProps, ExecutionsS
     )
   }
 
-  calculateDueDate(): string {
-    const date = new Date()
-    date.setDate(date.getDate() + 7)
-
-    return dateFormat(date, 'yyyy-mm-dd') as string
+  calculateexecutionDate(): string {
+    var isoDateString = new Date().toISOString();
+    return isoDateString
   }
 }

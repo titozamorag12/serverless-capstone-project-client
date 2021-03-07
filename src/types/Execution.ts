@@ -2,7 +2,7 @@ export interface Execution {
   executionId: string;
   createdAt: string;
   name: string;
-  dueDate: string;
+  executionDate: string;
   done: boolean;
   attachmentUrl?: string;
 }
